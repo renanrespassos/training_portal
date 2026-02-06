@@ -1,0 +1,64 @@
+program:
+  title: "Trilha de Capacitação – Analista Telecom"
+  duration_weeks: 12
+  last_update: "2026-02-06"
+
+modules:
+
+  - id: W01
+    week: 1
+    area: Fundamentos
+    title: Onboarding + ISO/IEC 17025
+    objective: Nivelar base de laboratório e rastreabilidade.
+    what_you_learn:
+      - Estrutura ISO 17025 aplicada
+      - Evidências e registros
+      - Rastreabilidade de medições
+    deliverables:
+      - Checklist de setup
+      - Evidências fotográficas
+    estimated_time_hours: 8
+    external_courses:
+      - name: ILAC Publications
+        url: https://ilac.org/publications-and-resources/
+        hours: 2h
+    approval_criteria:
+      - Evidências completas
+      - Registro auditável
+
+  - id: W07
+    week: 7
+    area: Celular
+    title: ETSI 136 – LTE
+    objective: Executar ensaios LTE ponta a ponta.
+    what_you_learn:
+      - Configuração LTE
+      - Perfis de teste
+      - Logs e evidências
+    deliverables:
+      - Mini relatório LTE
+    estimated_time_hours: 10
+    external_courses:
+      - name: ETSI TS 136 521
+        url: https://www.etsi.org/deliver/etsi_ts/136500_136599/136521/
+        hours: 2h
+    approval_criteria:
+      - Execução sem supervisão
+
+  - id: W09
+    week: 9
+    area: Redes
+    title: IPv6 Ready + RFC 8200
+    objective: Validar readiness IPv6.
+    what_you_learn:
+      - RFC 8200 aplicada
+      - NDP e ICMPv6
+    deliverables:
+      - Relatório IPv6
+    estimated_time_hours: 10
+    external_courses:
+      - name: NIC.br IPv6
+        url: https://cursoseventos.nic.br/curso/curso-ipv6/
+        hours: 8h
+    approval_criteria:
+      - Topologia validada
