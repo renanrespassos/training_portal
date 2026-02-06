@@ -7,9 +7,10 @@ modules:
   - name: "Fundamentos RF"
     content:
       - Conceitos de RF e espectro
-      - RBW, VBW, Span, Sweep
-      - Dynamic range e ruído
+      - RBW, VBW, Span e Sweep
+      - Dynamic range e ruído de piso
       - Boas práticas de medição
+      - Configuração de analisador de espectro
 
     courses:
       - name: "Rohde & Schwarz – Spectrum Analyzer Fundamentals"
@@ -28,10 +29,11 @@ modules:
 
   - name: "Bancada & Configuração"
     content:
-      - Configuração via PuTTY/TeraTerm
+      - Configuração via PuTTY e TeraTerm
       - Logs e comandos AT
+      - Configuração de firmware
       - ESP32 e microcontroladores
-      - Preparação de amostras
+      - Preparação de amostras para ensaio
 
     courses:
       - name: "ESP32 Programming – Espressif"
@@ -50,7 +52,9 @@ modules:
       - ETSI 151 – 2G
       - ETSI 134 – 3G
       - ETSI 136 – 4G
-      - Configuração CMW500 / MT8821
+      - Configuração CMW500
+      - Configuração MT8821
+      - Execução de ensaios OTA e conduzidos
 
     courses:
       - name: "ETSI Deliverables"
@@ -61,6 +65,7 @@ modules:
     evaluation:
       - Executar ensaio completo
       - Gerar relatório draft
+      - Evidência rastreável
 
 
   - name: "Regulatório Anatel"
@@ -69,7 +74,92 @@ modules:
       - Ato 3151
       - Ato 237
       - Interpretação normativa
+      - Construção de evidências regulatórias
 
     courses:
-      - nam
+      - name: "Biblioteca de Atos Anatel"
+        url: "https://informacoes.anatel.gov.br/legislacao/atos-de-certificacao-de-produtos"
 
+    time: "16 horas"
+
+    evaluation:
+      - Mapear requisito x evidência
+      - Interpretar requisitos sozinho
+
+
+  - name: "IPv6 & Redes"
+    content:
+      - RFC 8200
+      - IPv6 Ready
+      - ICMPv6 e NDP
+      - Topologia de testes
+      - Configuração de rede para ensaios
+
+    courses:
+      - name: "NIC.br – Curso IPv6"
+        url: "https://cursoseventos.nic.br/curso/curso-ipv6/"
+
+      - name: "RFC 8200 – IETF"
+        url: "https://datatracker.ietf.org/doc/html/rfc8200"
+
+    time: "20 horas"
+
+    evaluation:
+      - Validar topologia IPv6
+      - Executar testes IPv6 Ready
+
+
+  - name: "Wireless & IoT"
+    content:
+      - Wi-Fi IEEE 802.11
+      - Bluetooth EDR
+      - LoRa
+      - ZigBee
+      - Spread Spectrum
+
+    courses:
+      - name: "LoRaWAN Academy"
+        url: "https://lora-developers.semtech.com/learning-center/"
+
+    time: "16 horas"
+
+    evaluation:
+      - Configurar setup IoT
+      - Executar testes wireless
+
+
+  - name: "Qualidade 17025"
+    content:
+      - Evidências de ensaio
+      - Rastreabilidade metrológica
+      - Revisão de relatórios
+      - Auditoria interna
+
+    courses:
+      - name: "ISO 17025 Training – ANAB"
+        url: "https://anab.ansi.org/training/iso-iec-17025"
+
+    time: "12 horas"
+
+    evaluation:
+      - Relatório sem não conformidades
+      - Evidência auditável
+
+
+  - name: "Soft Skills"
+    content:
+      - Liderança
+      - Gestão de projetos
+      - Inteligência emocional
+      - Comunicação técnica
+      - Inglês intermediário
+
+    courses:
+      - name: "Leadership Foundations – Coursera"
+        url: "https://www.coursera.org/learn/leadership-foundations"
+
+    time: "Contínuo"
+
+    evaluation:
+      - Conduzir reunião técnica
+      - Apresentar resultados
