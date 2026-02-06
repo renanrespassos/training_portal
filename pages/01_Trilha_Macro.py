@@ -4,21 +4,14 @@ from pathlib import Path
 
 st.set_page_config(page_title="Trilha Macro", layout="wide")
 
-@st.cache_data
-def load_catalog():
-    return yaml.safe_load(Path("catalog.yml").read_text(encoding="utf-8"))
+catalog = yaml.safe_load(Path("catalog.yml").read_text(encoding="utf-8"))
+modules = catalog["modules"]
 
-catalog = load_catalog()
-modules = catalog.get("modules", [])
+st.title("🧭 Trilha de Capacitação – Visão Macro")
 
-st.title("📍 Visão Macro da Trilha")
+cols = st.columns(2)
 
-for m in modules:
-    with st.expander(f"Semana {m['week']} • {m['title']}"):
-        st.write(f"**Objetivo:** {m['objective']}")
-
-        st.write("**Aprendizado:**")
-        for i in m["what_you_learn"]:
-            st.write(f"- {i}")
-
-        st.write(f"⏱️ Tempo: {m['estimated_time_hours']}h")
+for i, m in enumerate(modules):
+    with cols[i % 2]:
+        st.markdown(f"### 📦 {m['name']}")
+        st.write("Clique no menu lateral para ver detalhes.")
