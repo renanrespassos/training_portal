@@ -1,17 +1,25 @@
 import streamlit as st
-import yaml
-from pathlib import Path
 
-st.set_page_config(page_title="Trilha Macro", layout="wide")
-
-catalog = yaml.safe_load(Path("catalog.yml").read_text(encoding="utf-8"))
-modules = catalog["modules"]
+st.set_page_config(page_title="Trilha Macro", page_icon="🧭", layout="wide")
 
 st.title("🧭 Trilha de Capacitação – Visão Macro")
 
-cols = st.columns(2)
+st.markdown("""
+### 📦 Sequência de Desenvolvimento
 
-for i, m in enumerate(modules):
-    with cols[i % 2]:
-        st.markdown(f"### 📦 {m['name']}")
-        st.write("Clique no menu lateral para ver detalhes.")
+1️⃣ **Fundamentos de Metrologia em Radio Frequência**  
+2️⃣ **Tecnologias de Comunicação Sem Fio**  
+3️⃣ **Configuração de Amostras**  
+4️⃣ **Qualidade ISO IEC 17025:2017**  
+5️⃣ **Regulatório Anatel**  
+6️⃣ **Ensaios em Estações Terminais de Acesso (ETA)**  
+7️⃣ **IPv6 & Redes**  
+8️⃣ **Soft Skills**
+""")
+
+st.info(
+"""
+A trilha foi estruturada para desenvolver o colaborador desde os fundamentos
+metrológicos até a execução completa de ensaios regulatórios e evolução comportamental.
+"""
+)
