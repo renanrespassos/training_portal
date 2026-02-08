@@ -1,32 +1,97 @@
 import streamlit as st
-import yaml
-from pathlib import Path
 
-st.set_page_config(page_title="Fundamentos RF", page_icon="📦", layout="wide")
+st.set_page_config(
+    page_title="Fundamentos de Metrologia em RF",
+    page_icon="📡",
+    layout="wide"
+)
 
-catalog = yaml.safe_load(Path("catalog.yml").read_text(encoding="utf-8"))
-modules = catalog.get("modules", [])
+# ======================
+# Header profissional
+# ======================
+st.markdown(
+    """
+    <div style="padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(49,51,63,0.18);">
+      <div style="font-size: 34px; font-weight: 800; line-height: 1.15;">1️⃣ Fundamentos de Metrologia em Radio Frequência</div>
+      <div style="margin-top: 6px; font-size: 16px; opacity: 0.85;">
+        Base teórica e prática para medições em RF: instrumentação, parâmetros de medição e boas práticas laboratoriais.
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-MODULE_NAME = "Fundamentos RF"
-mod = next((m for m in modules if m.get("name") == MODULE_NAME), None)
+st.write("")
 
-st.title(f"📦 {MODULE_NAME}")
+# ======================
+# KPIs (Tempo / Dificuldade)
+# ======================
+k1, k2, k3 = st.columns(3)
+with k1:
+    st.metric("⏱️ Tempo de desenvolvimento", "3 meses")
+with k2:
+    st.metric("🎚️ Nível de dificuldade", "Médio")
+with k3:
+    st.metric("🎓 Modalidade", "E-learning + prática supervisionada")
 
-if not mod:
-    st.error(f"Módulo '{MODULE_NAME}' não encontrado no catalog.yml.")
-    st.stop()
+st.write("")
 
-st.subheader("📖 Conteúdo")
-for item in mod.get("content", []):
-    st.markdown(f"- {item}")
+# ======================
+# Conteúdo principal em abas
+# ======================
+tab1, tab2, tab3, tab4 = st.tabs(["📖 Conteúdo", "🎓 Formas de Aprendizado", "✅ Avaliação", "📝 Observações"])
 
-st.subheader("🎓 Cursos")
-for c in mod.get("courses", []):
-    st.markdown(f"- [{c.get('name','Curso')}]({c.get('url','#')})")
+with tab1:
+    st.subheader("📖 Conteúdo")
+    st.markdown(
+        """
+- Conceitos básicos de física e elétrica  
+- Conceitos de rádio frequência e espectro  
+- Boas práticas de medição  
+- Configuração de analisador de espectro  
+        """
+    )
 
-st.subheader("⏱️ Tempo")
-st.info(mod.get("time", "Não informado"))
+with tab2:
+    st.subheader("🎓 Formas de Aprendizado")
 
-st.subheader("✅ Avaliação")
-for item in mod.get("evaluation", []):
-    st.markdown(f"- {item}")
+    st.markdown("**Cursos (online):**")
+    st.markdown(
+        """
+- ✅ **Grátis** — [Fundamentos de RF (Anritsu)](https://www.anritsu.com/en-us/test-measurement/support/training-and-education/elearning/rf-fundamentals)  
+- ✅ **Grátis** — [Introdução ao Analisador de Espectro (Anritsu)](https://www.anritsu.com/en-us/test-measurement/support/training-and-education/elearning/spectrum-analysis/introduction-to-spectrum-analysis)  
+        """
+    )
+
+    st.markdown("**Prática supervisionada (LABELO):**")
+    st.markdown("- Execução supervisionada na prática (bancada / rotina real de medição)")
+
+with tab3:
+    st.subheader("✅ Avaliação")
+    st.markdown(
+        """
+- Configurar medição sozinho  
+- Repetibilidade de medição  
+- Análise de problemas comuns  
+- Avaliação teórica  
+        """
+    )
+
+with tab4:
+    st.subheader("📝 Observações")
+    st.write(
+        "Conhecimento teórico e prático dos fundamentos de medição em radiofrequência, "
+        "abrangendo conceitos básicos de instrumentação, parâmetros de medição e boas práticas laboratoriais."
+    )
+    st.write(
+        "Esse conhecimento encontra-se amplamente consolidado no LABELO, especialmente entre profissionais "
+        "com experiência nas atividades de calibração em radiofrequência."
+    )
+
+st.write("")
+st.divider()
+
+# ======================
+# Rodapé / padrão
+# ======================
+st.caption("Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO")
