@@ -7,12 +7,23 @@ st.set_page_config(
 )
 
 # ======================
+# Botão retorno
+# ======================
+col_back, _ = st.columns([1,6])
+
+with col_back:
+    if st.button("⬅️ Voltar para Trilha"):
+        st.switch_page("pages/00_Trilha_Macro.py")
+
+# ======================
 # Header profissional
 # ======================
 st.markdown(
     """
     <div style="padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(49,51,63,0.18);">
-      <div style="font-size: 34px; font-weight: 800; line-height: 1.15;">1️⃣ Fundamentos de Metrologia em Radio Frequência</div>
+      <div style="font-size: 34px; font-weight: 800; line-height: 1.15;">
+        1️⃣ Fundamentos de Metrologia em Radio Frequência
+      </div>
       <div style="margin-top: 6px; font-size: 16px; opacity: 0.85;">
         Base teórica e prática para medições em RF: instrumentação, parâmetros de medição e boas práticas laboratoriais.
       </div>
@@ -24,22 +35,45 @@ st.markdown(
 st.write("")
 
 # ======================
-# KPIs (Tempo / Dificuldade)
+# KPIs customizados (sem truncar texto)
 # ======================
-k1, k2, k3 = st.columns(3)
-with k1:
-    st.metric("⏱️ Tempo de desenvolvimento", "3 meses")
-with k2:
-    st.metric("🎚️ Nível de dificuldade", "Médio")
-with k3:
-    st.metric("🎓 Modalidade", "E-learning + prática supervisionada")
+c1, c2, c3 = st.columns(3)
+
+def card(title, value):
+    st.markdown(
+        f"""
+        <div style="
+            padding:18px;
+            border-radius:14px;
+            border:1px solid rgba(49,51,63,0.2);
+            text-align:center;
+        ">
+            <div style="font-size:14px; opacity:0.75;">{title}</div>
+            <div style="font-size:28px; font-weight:700; margin-top:6px;">
+                {value}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with c1:
+    card("⏱️ Tempo de desenvolvimento", "3 meses")
+
+with c2:
+    card("🎚️ Nível de dificuldade", "Médio")
+
+with c3:
+    card("🎓 Modalidade", "E-learning + prática supervisionada")
 
 st.write("")
 
 # ======================
-# Conteúdo principal em abas
+# Conteúdo em abas
 # ======================
-tab1, tab2, tab3, tab4 = st.tabs(["📖 Conteúdo", "🎓 Formas de Aprendizado", "✅ Avaliação", "📝 Observações"])
+tab1, tab2, tab3, tab4 = st.tabs(
+    ["📖 Conteúdo", "🎓 Formas de Aprendizado", "✅ Avaliação", "📝 Observações"]
+)
 
 with tab1:
     st.subheader("📖 Conteúdo")
@@ -56,6 +90,7 @@ with tab2:
     st.subheader("🎓 Formas de Aprendizado")
 
     st.markdown("**Cursos (online):**")
+
     st.markdown(
         """
 - ✅ **Grátis** — [Fundamentos de RF (Anritsu)](https://www.anritsu.com/en-us/test-measurement/support/training-and-education/elearning/rf-fundamentals)  
@@ -64,7 +99,9 @@ with tab2:
     )
 
     st.markdown("**Prática supervisionada (LABELO):**")
-    st.markdown("- Execução supervisionada na prática (bancada / rotina real de medição)")
+    st.markdown(
+        "- Execução supervisionada na prática (bancada / rotina real de medição)"
+    )
 
 with tab3:
     st.subheader("✅ Avaliação")
@@ -79,10 +116,12 @@ with tab3:
 
 with tab4:
     st.subheader("📝 Observações")
+
     st.write(
         "Conhecimento teórico e prático dos fundamentos de medição em radiofrequência, "
         "abrangendo conceitos básicos de instrumentação, parâmetros de medição e boas práticas laboratoriais."
     )
+
     st.write(
         "Esse conhecimento encontra-se amplamente consolidado no LABELO, especialmente entre profissionais "
         "com experiência nas atividades de calibração em radiofrequência."
@@ -92,6 +131,8 @@ st.write("")
 st.divider()
 
 # ======================
-# Rodapé / padrão
+# Rodapé
 # ======================
-st.caption("Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO")
+st.caption(
+    "Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO"
+)
