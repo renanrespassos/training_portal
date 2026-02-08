@@ -1,32 +1,131 @@
 import streamlit as st
-import yaml
-from pathlib import Path
 
-st.set_page_config(page_title="Regulatório Anatel", page_icon="📦", layout="wide")
+st.set_page_config(
+    page_title="Qualidade ISO IEC 17025:2017",
+    page_icon="✅",
+    layout="wide"
+)
 
-catalog = yaml.safe_load(Path("catalog.yml").read_text(encoding="utf-8"))
-modules = catalog.get("modules", [])
+# ======================
+# Header profissional
+# ======================
+st.markdown(
+    """
+    <div style="padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(49,51,63,0.18);">
+      <div style="font-size: 34px; font-weight: 800; line-height: 1.15;">
+        4️⃣ Qualidade ISO IEC17025:2017
+      </div>
+      <div style="margin-top: 6px; font-size: 16px; opacity: 0.85;">
+        Consolidação dos requisitos essenciais de qualidade e integridade técnica no laboratório,
+        garantindo rastreabilidade, registros completos e robustez na emissão de relatórios.
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-MODULE_NAME = "Regulatório Anatel"
-mod = next((m for m in modules if m.get("name") == MODULE_NAME), None)
+st.write("")
 
-st.title(f"📦 {MODULE_NAME}")
+# ======================
+# KPIs (cards iguais)
+# ======================
+c1, c2, c3 = st.columns(3)
 
-if not mod:
-    st.error(f"Módulo '{MODULE_NAME}' não encontrado no catalog.yml.")
-    st.stop()
+def card(title, value):
+    st.markdown(
+        f"""
+        <div style="
+            padding:18px;
+            border-radius:14px;
+            border:1px solid rgba(49,51,63,0.2);
+            text-align:center;
+            height:140px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+        ">
+            <div style="font-size:14px; opacity:0.75;">{title}</div>
+            <div style="
+                font-size:22px;
+                font-weight:700;
+                margin-top:6px;
+                line-height:1.2;
+            ">
+                {value}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-st.subheader("📖 Conteúdo")
-for item in mod.get("content", []):
-    st.markdown(f"- {item}")
+with c1:
+    card("⏱️ Tempo de desenvolvimento", "3 meses")
 
-st.subheader("🎓 Cursos")
-for c in mod.get("courses", []):
-    st.markdown(f"- [{c.get('name','Curso')}]({c.get('url','#')})")
+with c2:
+    card("🎚️ Nível de dificuldade", "Fácil")
 
-st.subheader("⏱️ Tempo")
-st.info(mod.get("time", "Não informado"))
+with c3:
+    card("🎓 Modalidade", "Treinamento interno +<br>prática operacional")
 
-st.subheader("✅ Avaliação")
-for item in mod.get("evaluation", []):
-    st.markdown(f"- {item}")
+st.write("")
+
+# ======================
+# Conteúdo em abas
+# ======================
+tab1, tab2, tab3, tab4 = st.tabs(
+    ["📖 Conteúdo", "🎓 Formas de Aprendizado", "✅ Avaliação", "📝 Observações"]
+)
+
+with tab1:
+    st.subheader("📖 Conteúdo")
+    st.markdown(
+        """
+- Competência e autorização  
+- Rastreabilidade metrológica  
+- Avaliação de métodos  
+- Registros técnicos completos  
+- Revisão de relatórios  
+- Controle de não conformidade  
+- Imparcialidade e confidencialidade  
+        """
+    )
+
+with tab2:
+    st.subheader("🎓 Formas de Aprendizado")
+    st.markdown(
+        """
+- Cursos internos do LABELO (Qualidade)  
+- Participação em Auditorias Internas  
+- Execução das atividades do laboratório (aplicação prática contínua)  
+        """
+    )
+
+with tab3:
+    st.subheader("✅ Avaliação")
+    st.markdown(
+        """
+- Avaliação teórica  
+        """
+    )
+
+with tab4:
+    st.subheader("📝 Observações")
+    st.write(
+        "Módulo voltado à consolidação dos requisitos de qualidade aplicados no dia a dia do laboratório, "
+        "com ênfase na geração de evidências auditáveis, rastreabilidade e padronização dos registros técnicos."
+    )
+
+st.write("")
+st.divider()
+
+# ======================
+# Rodapé + botão retorno
+# ======================
+col1, col2 = st.columns([6, 1])
+
+with col1:
+    st.caption("Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO")
+
+with col2:
+    if st.button("⬅️ Voltar"):
+        st.switch_page("pages/00_Trilha_Macro.py")
