@@ -7,15 +7,6 @@ st.set_page_config(
 )
 
 # ======================
-# Botão retorno
-# ======================
-col_back, _ = st.columns([1,6])
-
-with col_back:
-    if st.button("⬅️ Voltar para Trilha"):
-        st.switch_page("pages/00_Trilha_Macro.py")
-
-# ======================
 # Header profissional
 # ======================
 st.markdown(
@@ -35,7 +26,7 @@ st.markdown(
 st.write("")
 
 # ======================
-# KPIs customizados (sem truncar texto)
+# KPIs (cards iguais)
 # ======================
 c1, c2, c3 = st.columns(3)
 
@@ -47,9 +38,18 @@ def card(title, value):
             border-radius:14px;
             border:1px solid rgba(49,51,63,0.2);
             text-align:center;
+            height:140px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
         ">
             <div style="font-size:14px; opacity:0.75;">{title}</div>
-            <div style="font-size:28px; font-weight:700; margin-top:6px;">
+            <div style="
+                font-size:22px;
+                font-weight:700;
+                margin-top:6px;
+                line-height:1.2;
+            ">
                 {value}
             </div>
         </div>
@@ -64,7 +64,7 @@ with c2:
     card("🎚️ Nível de dificuldade", "Médio")
 
 with c3:
-    card("🎓 Modalidade", "E-learning + prática supervisionada")
+    card("🎓 Modalidade", "E-learning +<br>prática supervisionada")
 
 st.write("")
 
@@ -131,8 +131,15 @@ st.write("")
 st.divider()
 
 # ======================
-# Rodapé
+# Rodapé + botão retorno
 # ======================
-st.caption(
-    "Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO"
-)
+col1, col2 = st.columns([6,1])
+
+with col1:
+    st.caption(
+        "Versão do módulo: v1 • Atualizado conforme trilha interna • LABELO"
+    )
+
+with col2:
+    if st.button("⬅️ Voltar"):
+        st.switch_page("pages/00_Trilha_Macro.py")
