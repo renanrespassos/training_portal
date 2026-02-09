@@ -58,7 +58,7 @@ def card(title, value):
     )
 
 with c1:
-    card("⏱️ Tempo de desenvolvimento", "6 meses")
+    card("⏱️ Tempo de desenvolvimento", "3 meses")
 
 with c2:
     card("🎚️ Nível de dificuldade", "Fácil")
