@@ -37,6 +37,7 @@ TEAM = {
             "Ele cuida principalmente dos ensaios com maior demanda e dos processos mais básicos."
         ),
     },
+
     "Eduardo": {
         "cargo": "Analista de Laboratório",
         "formacao": "Técnico em Eletrônica (completo) • Engenharia em andamento",
@@ -56,6 +57,26 @@ TEAM = {
             "Será responsável pelas pesquisas e ensaios de 5G."
         ),
     },
+
+    "Joao Pinheiro": {
+        "cargo": "Analista de Laboratório",
+        "formacao": "Técnico em Eletrônica (completo) • Engenharia Mecatrônica em andamento",
+        "scores": {
+            MODULES[0]: (90, "OK"),
+            MODULES[1]: (90, "OK"),
+            MODULES[2]: (90, "OK"),
+            MODULES[3]: (40, "Desenvolvimento"),
+            MODULES[4]: (30, "Desenvolvimento - Foco"),
+            MODULES[5]: (0, "OK"),
+            MODULES[6]: (30, "OK"),
+            MODULES[7]: (20, "Desenvolvimento"),
+        },
+        "obs": (
+            "João está à frente de outros tipos de ensaios que envolvem métodos presentes em nosso escopo "
+            "e que exigem maior nível de experiência para execução. Além disso, atua em melhorias internas do laboratório."
+        ),
+    },
+
     "Greter": {
         "cargo": "Analista de Laboratório",
         "formacao": "Engenharia (concluída)",
@@ -74,6 +95,7 @@ TEAM = {
             "Será responsável pelos ensaios atuais e irá ensinar a Lauren em um futuro próximo."
         ),
     },
+
     "Lauren": {
         "cargo": "Assistente de Laboratório",
         "formacao": "Vinda da calibração (experiência prática forte)",
@@ -97,11 +119,22 @@ TEAM = {
 # -----------------------------
 # Helpers
 # -----------------------------
-def status_badge(status: str) -> str:
-    # sem cor específica, apenas texto (mantém padrão visual limpo)
-    if status.lower() == "ok":
+def status_badge(score: int, status: str) -> str:
+    # remove "OK" abaixo de 50% (e, na prática, qualquer status abaixo de 50% pode ficar vazio)
+    if score < 50 and status.strip().lower() == "ok":
+        return ""
+    if score < 50 and status.strip() == "":
+        return ""
+    if score < 50 and status.strip().lower() == "ok":
+        return ""
+    if score < 50 and status.strip().lower() != "ok":
+        # mantém Desenvolvimento/Foco se você quiser (mas você pediu só tirar OK)
+        return status
+    # score >= 50
+    if status.strip().lower() == "ok":
         return "OK"
     return status
+
 
 def make_individual_df(name: str) -> pd.DataFrame:
     p = TEAM[name]
@@ -111,16 +144,16 @@ def make_individual_df(name: str) -> pd.DataFrame:
         rows.append({
             "Módulo": m,
             "Adesão (%)": int(score),
-            "Status": status_badge(status),
+            "Status": status_badge(int(score), str(status)),
         })
     return pd.DataFrame(rows)
+
 
 def make_overall_df() -> pd.DataFrame:
     rows = []
     for person in TEAM.keys():
         p = TEAM[person]
-        # média simples
-        scores = [p["scores"][m][0] for m in MODULES]
+        scores = [p["scores"].get(m, (0, ""))[0] for m in MODULES]
         avg = sum(scores) / len(scores)
         rows.append({
             "Técnico": person,
@@ -128,6 +161,7 @@ def make_overall_df() -> pd.DataFrame:
             "Média (%)": round(avg, 1),
         })
     return pd.DataFrame(rows).sort_values("Média (%)", ascending=False)
+
 
 # -----------------------------
 # UI
@@ -163,15 +197,13 @@ with left:
 with right:
     df = make_individual_df(person)
 
-    # KPI de média
     avg = df["Adesão (%)"].mean()
-    st.markdown("#### Visão geral do módulo selecionado")
+    st.markdown("#### Visão geral do técnico selecionado")
     st.metric("Média de aderência", f"{avg:.1f}%")
 
     st.write("")
-
-    # Barras por módulo (fácil de ler)
     st.markdown("#### Aderência por módulo")
+
     for _, r in df.iterrows():
         col_a, col_b = st.columns([3, 1.2])
         with col_a:
@@ -180,19 +212,19 @@ with right:
         with col_b:
             st.write("")
             st.write(f"**{r['Adesão (%)']}%**")
-            st.caption(r["Status"])
+            # só mostra status se existir
+            if str(r["Status"]).strip():
+                st.caption(r["Status"])
 
     st.write("")
     st.divider()
 
-    # Tabela detalhada
     st.markdown("#### Detalhamento (tabela)")
     st.dataframe(df, use_container_width=True, hide_index=True)
 
 st.write("")
 st.divider()
 
-# Comparativo geral
 st.markdown("### Comparativo do time (média por técnico)")
 overall = make_overall_df()
 st.dataframe(overall, use_container_width=True, hide_index=True)
