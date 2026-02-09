@@ -34,7 +34,7 @@ TEAM = {
         "obs": (
             "Bernardo está sendo treinado principalmente para ser a referência para os ensaios do Ato 14448 "
             "e também o organizador do cronograma e da equipe. "
-            "Ele cuida principalmente da 'vaca leiteira' e dos processos mais básicos."
+            "Ele cuida principalmente dos ensaios com maior demanda e dos processos mais básicos."
         ),
     },
     "Eduardo": {
